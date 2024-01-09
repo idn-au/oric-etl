@@ -1,10 +1,11 @@
 """
 Convert ORIC extract from csv to RDF
 """
-import pandas as pd
-from rdflib import Graph, URIRef, Namespace, Literal, Dataset
-from rdflib.namespace import RDF, SDO
 from datetime import date
+
+import pandas as pd
+from rdflib import Graph, URIRef, Namespace, Literal
+from rdflib.namespace import RDF, SDO
 
 
 def main():
