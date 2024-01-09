@@ -52,8 +52,6 @@ def main():
             )
         )
         g.add((item_iri, SDO.url, Literal(str(row["URL"]), datatype=SDO.URL)))
-        if index > 1:
-            break
     g.serialize(destination='oric.ttl', format="longturtle")
 
 
