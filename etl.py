@@ -44,23 +44,24 @@ STATE = {
 
 
 def strToCamel(string: str) -> str:
-    """Convert the string to camelCase stripping out any non-alphanumeric characters"""
+    """Convert the given string to camelCase stripping out any non-alphanumeric characters"""
     clean = re.sub(r"[^\w\s]", " ", string).strip()
-    words = clean.split(' ')
-    return ''.join([words[0].lower()] + [word.title() for word in words[1:]])
+    words = clean.split(" ")
+    return "".join([words[0].lower()] + [word.title() for word in words[1:]])
+
 
 def extract_vocab(
-        column: pd.Series,
-        cs_iri: URIRef,
-        cs_definition: str,
-        creator_iri: URIRef,
-        creator_name: str,
-        creator_url: str,
-        vocab_name: str,
-        nested: bool = False,
-        seperator: str = "",
-        format: str = "longturtle",
-        filename: str = "vocab.ttl",
+    column: pd.Series,
+    cs_iri: URIRef,
+    cs_definition: str,
+    creator_iri: URIRef,
+    creator_name: str,
+    creator_url: str,
+    vocab_name: str,
+    nested: bool = False,
+    seperator: str = "",
+    format: str = "longturtle",
+    filename: str = "vocab.ttl",
 ) -> dict:
     """Extract vocab terms from the distinct items given in column
 
@@ -68,22 +69,21 @@ def extract_vocab(
     A dictionary of the extracted terms is returned
 
 
-    :param creator_url: URL for the creator
-    :param creator_name: Name of the vocabulary creator
-    :param creator_iri: IRI of the creator. should be person or organization
-    :param cs_definition: definition of the vocabulary to be created.
-    :param cs_iri: IRI for the vocabulary to be created
-    :param vocab_name: name of the vocabulary.
     :param column: A pandas series containing values to be parsed into a vocab
-    :param cs_iri: An IRI for the concept scheme
+    :param cs_iri: IRI for the vocabulary to be created
+    :param cs_definition: definition of the vocabulary to be created.
+    :param creator_iri: IRI of the creator. should be person or organization
+    :param creator_name: Name of the vocabulary creator
+    :param creator_url: URL for the creator
+    :param vocab_name: name of the vocabulary.
     :param nested: Are the values in each cell of the column themselves a list?
     :param seperator: The charactre used to seperate the entries of each cell in column.
                       only required if nested is True.
-    :param filename: name of the file to write the vocab to
     :param format: RDF format to use. defaults to longturtle
+    :param filename: name of the file to write the vocab to
     """
     g = Graph()
-    cs = Namespace(cs_iri + "/")
+    cs = Namespace(cs_iri)
     g.bind("cs", cs)
 
     # set up the CS
@@ -124,7 +124,7 @@ def extract_vocab(
 
     concept_dict: dict[str, URIRef] = {}
     for concept in concept_set:
-        concept_iri = URIRef(cs_iri + "/" + strToCamel(concept))
+        concept_iri = URIRef(cs_iri + strToCamel(concept))
         g.add((concept_iri, RDF.type, SKOS.Concept))
         g.add((concept_iri, SKOS.prefLabel, Literal(concept)))
         g.add(
@@ -159,7 +159,7 @@ def main():
     # extract industries into a vocab
     industry_vocab = extract_vocab(
         column=df["Industry"],
-        cs_iri=URIRef("https://data.idnau.org/pid/vocab/oric"),
+        cs_iri=URIRef("https://data.idnau.org/pid/vocab/oric/"),
         cs_definition="Industry that an organisation or individual operates in",
         creator_iri=URIRef("https://linked.data.gov.au/org/idn"),
         creator_name="Indigenous Data Network",
@@ -196,11 +196,17 @@ def main():
         if not pd.isna(row["Industry"]):
             for industries in row["Industry"].split(";"):
                 if isinstance(industries, str):
-                    g.add((item_iri, SDO.industry, industry_vocab[strToCamel(industries)]))
+                    g.add(
+                        (item_iri, SDO.industry, industry_vocab[strToCamel(industries)])
+                    )
                 else:
                     for industry in industries:
                         g.add(
-                            (item_iri, SDO.industry, industry_vocab[strToCamel(industry)])
+                            (
+                                item_iri,
+                                SDO.industry,
+                                industry_vocab[strToCamel(industry)],
+                            )
                         )
         g.add((item_iri, SDO.postalCode, Literal(str(row["Post Code"]))))
         g.add((item_iri, SDO.nonprofitStatus, Literal(str(row["ACNC Registered?"]))))

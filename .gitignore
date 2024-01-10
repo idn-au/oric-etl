@@ -1,6 +1,7 @@
 venv/
 .idea/
 .mypy_cache/
+.mypy.ini
 .ropeproject/
 **/__pycache__/
 oric.nq
