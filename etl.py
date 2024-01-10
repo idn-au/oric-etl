@@ -150,13 +150,13 @@ def main():
     IDNI = Namespace("https://data.idnau.org/pid/vocab/org-indegeniety/")
     g.bind("idncp", IDNCP)
     g.bind("idni", IDNI)
-    g.bind("oricAgent", DS)
+    g.bind("oricAgents", DS)
 
     g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=SDO.Date)))
     g.add((dataset_iri, RDF.type, SDO.Dataset))
     g.add((dataset_iri, SDO.name, Literal("ORIC Extract")))
 
-    df = pd.read_csv("oric_corps2023.csv", encoding="ISO-8859-1")
+    df = pd.read_csv("source.csv", encoding="ISO-8859-1")
 
     # extract industries into a vocab
     industry_vocab = extract_vocab(
@@ -169,6 +169,7 @@ def main():
         vocab_name="ORIC Industry Vocabulary",
         nested=True,
         seperator=";",
+        filename='outputs/oricIndustries.ttl'
     )
     for index, row in df.iterrows():
         item_iri = URIRef(DS + strToCamel(row["Corporation"]))
@@ -233,7 +234,7 @@ def main():
             )
         if not pd.isna(row["URL"]):
             g.add((item_iri, SDO.url, Literal(str(row["URL"]), datatype=XSD.anyURI)))
-    g.serialize(destination="oric.ttl", format="longturtle")
+    g.serialize(destination="outputs/oricAgents.ttl", format="longturtle")
 
 
 if __name__ == "__main__":

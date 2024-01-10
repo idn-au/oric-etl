@@ -1,0 +1,205 @@
+PREFIX cs: <https://data.idnau.org/pid/vocab/oric/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+cs:agricultureAquacultureForestryFishing
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Agriculture, aquaculture, forestry, fishing" ;
+.
+
+cs:arts
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Arts" ;
+.
+
+cs:communicationServices
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Communication services" ;
+.
+
+cs:communityServices
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Community services" ;
+.
+
+cs:construction
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Construction" ;
+.
+
+cs:educationAndTraining
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Education and training" ;
+.
+
+cs:employment
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Employment" ;
+.
+
+cs:healthCareAndHealthPromotion
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Health care and health promotion" ;
+.
+
+cs:heritageAndCulture
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Heritage and culture" ;
+.
+
+cs:hospitalityAndTourism
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Hospitality and tourism" ;
+.
+
+cs:housingAndTenancy
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Housing and tenancy" ;
+.
+
+cs:landAndWatersManagementCareForCountry
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Land and waters management?care for Country" ;
+.
+
+cs:manufacturing
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Manufacturing" ;
+.
+
+cs:miningAndMiningSupportServices
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Mining and mining support services" ;
+.
+
+cs:municipalServices
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Municipal services" ;
+.
+
+cs:other
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Other" ;
+.
+
+cs:otherServices
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Other services" ;
+.
+
+cs:spiritualCongregationAndReligion
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Spiritual congregation and religion" ;
+.
+
+cs:transportAndStorage
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Transport and storage" ;
+.
+
+cs:wholesaleAndRetailTradeShops
+    a skos:Concept ;
+    rdfs:isDefinedBy cs: ;
+    skos:definition "Member of ORIC Industry Vocabulary" ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Wholesale and retail trade (shops)" ;
+.
+
+<https://linked.data.gov.au/org/idn>
+    a schema:Organization ;
+    schema:name "Indigenous Data Network" ;
+    schema:url "https://www.idnau.org"^^xsd:anyURI ;
+.
+
+cs:
+    a skos:ConceptScheme ;
+    dcterms:created "2024-01-11"^^xsd:date ;
+    dcterms:creator <https://linked.data.gov.au/org/idn> ;
+    dcterms:modified "2024-01-11"^^xsd:date ;
+    dcterms:provenance "Extracted for Indigenous Data Network 2024" ;
+    dcterms:publisher <https://linked.data.gov.au/org/idn> ;
+    dcterms:rights "(c) Indigenous Data Network, 2022" ;
+    skos:definition "Industry that an organisation or individual operates in" ;
+    skos:hasTopConcept
+        cs:agricultureAquacultureForestryFishing ,
+        cs:arts ,
+        cs:communicationServices ,
+        cs:communityServices ,
+        cs:construction ,
+        cs:educationAndTraining ,
+        cs:employment ,
+        cs:healthCareAndHealthPromotion ,
+        cs:heritageAndCulture ,
+        cs:hospitalityAndTourism ,
+        cs:housingAndTenancy ,
+        cs:landAndWatersManagementCareForCountry ,
+        cs:manufacturing ,
+        cs:miningAndMiningSupportServices ,
+        cs:municipalServices ,
+        cs:other ,
+        cs:otherServices ,
+        cs:spiritualCongregationAndReligion ,
+        cs:transportAndStorage ,
+        cs:wholesaleAndRetailTradeShops ;
+    skos:prefLabel "ORIC Industry Vocabulary" ;
+.
