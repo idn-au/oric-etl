@@ -147,7 +147,9 @@ def main():
     dataset_iri = URIRef("https://data.idnau.org/pid/agent/oric/")
     DS = Namespace(dataset_iri)
     IDNCP = Namespace("https://data.idnau.org/pid/cp/")
+    IDNI = Namespace("https://data.idnau.org/pid/vocab/org-indegeniety/")
     g.bind("idncp", IDNCP)
+    g.bind("idni", IDNI)
     g.bind("oricAgent", DS)
 
     g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=SDO.Date)))
@@ -169,9 +171,17 @@ def main():
         seperator=";",
     )
     for index, row in df.iterrows():
-        item_iri = URIRef(DS + str(row["ICN"]))
+        item_iri = URIRef(DS + strToCamel(row["Corporation"]))
+
+        # set standard properties
         g.add((dataset_iri, SDO.hasPart, item_iri))
         g.add((item_iri, RDF.type, SDO.Organization))
+        g.add((item_iri, SDO.name, Literal(row["Corporation"])))
+        g.add((item_iri, SDO.description, Literal("ORIC Registered Corporation")))
+        g.add((item_iri, DCTERMS.type, IDNI["indigenous-persons-organisation"]))
+
+        # read properties from cells
+        g.add((item_iri, SDO.identifier, Literal(row["ICN"], datatype=IDNCP.ICN)))
         if row["Status"] == "Registered":
             g.add(
                 (
@@ -188,9 +198,10 @@ def main():
                     Literal(row["Status Date"], datatype=SDO.Date),
                 )
             )
-        g.add(
-            (item_iri, SDO.identifier, Literal(str(row["ABN"]), datatype=IDNCP.abnId))
-        )
+        if not pd.isna(row["ABN"]):
+            g.add(
+                (item_iri, SDO.identifier, Literal(str(row["ABN"]), datatype=IDNCP.abnId))
+            )
         if not pd.isna(row["State"]):
             g.add((item_iri, SDO.location, STATE[str(row["State"])]))
         if not pd.isna(row["Industry"]):
@@ -208,16 +219,20 @@ def main():
                                 industry_vocab[strToCamel(industry)],
                             )
                         )
-        g.add((item_iri, SDO.postalCode, Literal(str(row["Post Code"]))))
-        g.add((item_iri, SDO.nonprofitStatus, Literal(str(row["ACNC Registered?"]))))
-        g.add(
-            (
-                item_iri,
-                SDO.numberOfEmployees,
-                Literal(str(row["Numbe of Members"]), datatype=SDO.Number),
+        if not pd.isna(row["Post Code"]):
+            g.add((item_iri, SDO.postalCode, Literal(str(row["Post Code"]))))
+        if not pd.isna(row["ACNC Registered?"]):
+            g.add((item_iri, SDO.nonprofitStatus, Literal(True, datatype=XSD.boolean)))
+        if not pd.isna(row["Numbe of Members"]):
+            g.add(
+                (
+                    item_iri,
+                    SDO.numberOfEmployees,
+                    Literal(str(row["Numbe of Members"]), datatype=SDO.Number),
+                )
             )
-        )
-        g.add((item_iri, SDO.url, Literal(str(row["URL"]), datatype=SDO.URL)))
+        if not pd.isna(row["URL"]):
+            g.add((item_iri, SDO.url, Literal(str(row["URL"]), datatype=XSD.anyURI)))
     g.serialize(destination="oric.ttl", format="longturtle")
 
 
