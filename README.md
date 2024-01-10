@@ -3,6 +3,14 @@
 ETL Scripts for Indegenous corporation data published by ORIC.  
 For eventual loading into the AgentsDB
 
+
+The etl.py script creates 2 files.
+- oricAgnets.ttl
+- industries.ttl
+
+`oricAgents.ttl` contains the extracted agents for upload to the agentsdb  
+`industries.ttl` contains an extracted vocabulary for the types of industries that oric agents operate in. for upload to IDN vocprez.
+
 Source data published here: https://data.gov.au/data/dataset/aboriginal-and-torres-strait-islander-corporations-oric
 
 
