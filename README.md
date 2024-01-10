@@ -6,6 +6,14 @@ For eventual loading into the AgentsDB
 Source data published here: https://data.gov.au/data/dataset/aboriginal-and-torres-strait-islander-corporations-oric
 
 
+ORIC registered corporations are corporations that comply with the Corporations (Aboriginal and Torres Strait Islander) Act 2006 (CATSI Act).
+
+**The three CATSI Act requirements are:**
+- All members must be at least 15 years old.
+- Most members must be Aboriginal or Torres Strait Islander.
+- By default, you must have at least five members. If you wish to have fewer than five (for example, a sole trader), you can apply for an exemption from that requirement.
+
+
 ## See Also
 
 - [ AgentsDB-data ](https://github.com/idn-au/agentsdb-data)
