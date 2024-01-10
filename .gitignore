@@ -1,5 +1,8 @@
 venv/
 .idea/
+.mypy_cache/
+.ropeproject/
+**/__pycache__/
 oric.nq
 /oric.ttl
 /vocab.ttl
