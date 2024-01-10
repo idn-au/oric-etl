@@ -8,6 +8,21 @@ from rdflib import Graph, URIRef, Namespace, Literal
 from rdflib.namespace import RDF, SDO
 
 
+# define states from ASGS: https://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items
+STATE = {
+    "ACT": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/8"),
+    "NSW": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/1"),
+    "NT": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/7"),
+    "OTHER": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/9"),
+    "OUTSIDE": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/Z"),
+    "QLD": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/3"),
+    "SA": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/4"),
+    "TAS": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/6"),
+    "VIC": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/2"),
+    "WA": URIRef("http://asgs.linked.fsdf.org.au/dataset/asgsed3/collections/STE/items/5")
+}
+
+
 def main():
     g = Graph()
     dataset_iri = URIRef("https://example.org/oric-extract")
@@ -16,6 +31,8 @@ def main():
     g.bind("idncp", IDNCP)
 
     g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=SDO.Date)))
+    g.add((dataset_iri, RDF.type, SDO.Dataset))
+    g.add((dataset_iri, SDO.name, Literal("ORIC Extract")))
 
     df = pd.read_csv("oric_corps2023.csv", encoding="ISO-8859-1")
     for index, row in df.iterrows():
@@ -41,7 +58,8 @@ def main():
         g.add(
             (item_iri, SDO.identifier, Literal(str(row["ABN"]), datatype=IDNCP.abnId))
         )
-        g.add((item_iri, SDO.location, Literal(str(row["State"]))))
+        if not pd.isna(row["State"]):
+            g.add((item_iri, SDO.location, STATE[str(row["State"])]))
         g.add((item_iri, SDO.industry, Literal(str(row["Industry"]))))
         g.add((item_iri, SDO.postalCode, Literal(str(row["Post Code"]))))
         g.add((item_iri, SDO.nonprofitStatus, Literal(str(row["ACNC Registered?"]))))
@@ -53,7 +71,7 @@ def main():
             )
         )
         g.add((item_iri, SDO.url, Literal(str(row["URL"]), datatype=SDO.URL)))
-    g.serialize(destination='oric.ttl', format="longturtle")
+    g.serialize(destination="oric.ttl", format="longturtle")
 
 
 if __name__ == "__main__":
