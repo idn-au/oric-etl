@@ -64,7 +64,7 @@ def extract_vocab(
 ) -> dict:
     """Extract vocab terms from the distinct items given in column
 
-    The parsed vocab is written to disk in the given format (default: turtle).
+    The parsed vocab is written to disk in the given format (default: longturtle).
     A dictionary of the extracted terms is returned
 
 
