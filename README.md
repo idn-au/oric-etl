@@ -4,14 +4,14 @@ ETL Scripts for Indegenous corporation data published by ORIC.
 For eventual loading into the AgentsDB
 
 
-The etl.py script creates 2 files.
-- oricAgnets.ttl
-- industries.ttl
+`etl.py` creates 2 files from `source.csv`.
+- `oricAgnets.ttl`
+- `industries.ttl`
 
 `oricAgents.ttl` contains the extracted agents for upload to the agentsdb  
-`industries.ttl` contains an extracted vocabulary for the types of industries that oric agents operate in. for upload to IDN vocprez.
+`industries.ttl` contains an extracted vocabulary for the types of industries that ORIC agents operate in. for upload to IDN vocprez.
 
-Source data published here: https://data.gov.au/data/dataset/aboriginal-and-torres-strait-islander-corporations-oric
+The ORIC data is updated monthly and published [here](https://data.gov.au/data/dataset/aboriginal-and-torres-strait-islander-corporations-oric)
 
 
 ORIC registered corporations are corporations that comply with the Corporations (Aboriginal and Torres Strait Islander) Act 2006 (CATSI Act).
@@ -24,5 +24,8 @@ ORIC registered corporations are corporations that comply with the Corporations 
 
 ## See Also
 
-- [ AgentsDB-data ](https://github.com/idn-au/agentsdb-data)
-- [ AgentsDB-crud-ui ](https://github.com/idn-au/agentsdb-crud-ui)
+- [ agentsdb-data ](https://github.com/idn-au/agentsdb-data)
+- [ agentsdb-crud-ui ](https://github.com/idn-au/agentsdb-crud-ui)
+- [ vocab-data ](https://github.com/idn-au/vocab-data)
+- [ spatial-data ](https://github.com/idn-au/spatial-data)
+- [ catalogue-data ](https://github.com/idn-au/catalogue-data)
