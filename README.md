@@ -1,6 +1,6 @@
 # ORIC Extract ETL Scripts
 
-ETL Scripts for Indegenous corporation data published by ORIC.  
+ETL Scripts for Indigenous corporation data published by ORIC.  
 
 
 `etl.py` creates 2 files from `source.csv`.
