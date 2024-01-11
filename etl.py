@@ -147,12 +147,12 @@ def main():
     dataset_iri = URIRef("https://data.idnau.org/pid/agent/oric/")
     DS = Namespace(dataset_iri)
     IDNCP = Namespace("https://data.idnau.org/pid/cp/")
-    IDNI = Namespace("https://data.idnau.org/pid/vocab/org-indegeniety/")
+    IDNI = Namespace("https://data.idnau.org/pid/vocab/org-indigeniety/")
     g.bind("idncp", IDNCP)
     g.bind("idni", IDNI)
     g.bind("oricAgents", DS)
 
-    g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=SDO.Date)))
+    g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=XSD.Date)))
     g.add((dataset_iri, RDF.type, SDO.Dataset))
     g.add((dataset_iri, SDO.name, Literal("ORIC Extract")))
 
@@ -188,7 +188,7 @@ def main():
                 (
                     item_iri,
                     SDO.foundingDate,
-                    Literal(row["Status Date"], datatype=SDO.Date),
+                    Literal(row["Status Date"], datatype=XSD.Date),
                 )
             )
         else:
@@ -196,7 +196,7 @@ def main():
                 (
                     item_iri,
                     SDO.dissolutionDate,
-                    Literal(row["Status Date"], datatype=SDO.Date),
+                    Literal(row["Status Date"], datatype=XSD.Date),
                 )
             )
         if not pd.isna(row["ABN"]):
