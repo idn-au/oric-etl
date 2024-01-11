@@ -2,7 +2,7 @@
 Convert ORIC extract from csv to RDF
 """
 import re
-from datetime import date
+from datetime import date, datetime
 
 import pandas as pd
 from rdflib import Graph, Literal, Namespace, URIRef, XSD
@@ -152,7 +152,7 @@ def main():
     g.bind("idni", IDNI)
     g.bind("oricAgents", DS)
 
-    g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=XSD.Date)))
+    g.add((dataset_iri, SDO.dateCreated, Literal(date.today(), datatype=XSD.date)))
     g.add((dataset_iri, RDF.type, SDO.Dataset))
     g.add((dataset_iri, SDO.name, Literal("ORIC Extract")))
 
@@ -183,12 +183,13 @@ def main():
 
         # read properties from cells
         g.add((item_iri, SDO.identifier, Literal(row["ICN"], datatype=IDNCP.ICN)))
+        status_date = datetime.strptime(row["Status Date"], '%d/%m/%Y').strftime('%Y-%m-%d')
         if row["Status"] == "Registered":
             g.add(
                 (
                     item_iri,
                     SDO.foundingDate,
-                    Literal(row["Status Date"], datatype=XSD.Date),
+                    Literal(status_date, datatype=XSD.date),
                 )
             )
         else:
@@ -196,7 +197,7 @@ def main():
                 (
                     item_iri,
                     SDO.dissolutionDate,
-                    Literal(row["Status Date"], datatype=XSD.Date),
+                    Literal(status_date, datatype=XSD.date),
                 )
             )
         if not pd.isna(row["ABN"]):
